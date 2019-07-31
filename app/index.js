@@ -15,7 +15,7 @@ class App extends React.Component {
 // take two arguments
 // - the react element to be rendered
 // - where the element to be rendered to
-RenderDom.render(
+ReactDOM.render(
   <App />,
   document.getElementById('app')
 )
