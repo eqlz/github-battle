@@ -5,10 +5,24 @@ export default class Popular extends React.Component {
     const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
 
     return (
+      //*
       // use React.createElement()
-      React.createElement('ul', null, languages.map((language, index) => (
-        React.createElement('li', { key: index }, language)
-      )))
+      React.createElement(
+        'ul',
+        { className: 'flex-center' }, 
+        languages.map((language, index) => (
+          React.createElement(
+            'li',
+            { key: index },
+            React.createElement(
+              'button',
+              { className: 'btn-clean nav-link' },
+              language
+            )
+          )
+        ))
+      )
+      /**/
 
       /* 
       // use JSX
@@ -16,7 +30,9 @@ export default class Popular extends React.Component {
         {
           languages.map((language, index) => (
             <li key={ index }>
-              { language }
+              <button className='btn-clean nav-link'>
+                { language }
+              </button>
             </li>
           ))
         }
