@@ -16,7 +16,7 @@ export default class Popular extends React.Component {
             { key: index },
             React.createElement(
               'button',
-              { className: 'btn-clean nav-link' },
+              { className: 'btn-clear nav-link' },
               language
             )
           )
@@ -30,7 +30,7 @@ export default class Popular extends React.Component {
         {
           languages.map((language, index) => (
             <li key={ index }>
-              <button className='btn-clean nav-link'>
+              <button className='btn-clear nav-link'>
                 { language }
               </button>
             </li>
