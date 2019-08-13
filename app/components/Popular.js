@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 function LanguageNav({ selectedLanguage, onUpdateLanguage }) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
 
@@ -48,6 +50,13 @@ function LanguageNav({ selectedLanguage, onUpdateLanguage }) {
       </ul>
       /* */
     )
+}
+
+// Not sure how this is better than just using TypeScript
+// Need to look into how to use TypeScript in React
+LanguageNav.propTypes = {
+  selectedLanguage: PropTypes.string.isRequired,
+  onUpdateLanguage: PropTypes.func.isRequired
 }
 export default class Popular extends React.Component {
   constructor(props) {
