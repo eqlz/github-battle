@@ -64,7 +64,7 @@ export default class Popular extends React.Component {
 
     this.state = {
       selectedLanguage: 'All',
-      repos: null,
+      repos: {},
       error: null,
     }
 
@@ -78,15 +78,18 @@ export default class Popular extends React.Component {
   updateLanguage(selectedLanguage) {
     this.setState({
       selectedLanguage,
-      repos: null,
       error: null,
     });
 
-    fetchPopularRepos(this.state.selectedLanguage)
-      .then((repos) => {
-        this.setState({
-          repos: repos,
-        });
+    if(!this.state.repos[selectedLanguage]) {
+      fetchPopularRepos(this.state.selectedLanguage)
+      .then((data) => {
+        this.setState(() => ({
+          repos: {
+            ...repos,
+            [selectedLanguage]: data
+          }
+        }));
       })
       .catch((error) => {
         console.warn('Error fetching repos', error);
@@ -95,6 +98,9 @@ export default class Popular extends React.Component {
           error: 'There is an error fetching repos'
         })
       });
+    }
+
+    
   }
 
   isLoading() {
