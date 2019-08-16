@@ -82,9 +82,9 @@ export default class Popular extends React.Component {
     });
 
     if(!this.state.repos[selectedLanguage]) {
-      fetchPopularRepos(this.state.selectedLanguage)
+      fetchPopularRepos(selectedLanguage)
       .then((data) => {
-        this.setState(() => ({
+        this.setState(({ repos }) => ({
           repos: {
             ...repos,
             [selectedLanguage]: data
@@ -99,12 +99,11 @@ export default class Popular extends React.Component {
         })
       });
     }
-
-    
   }
 
   isLoading() {
-    return this.state.repos === null && this.state.error === null;
+    const { selectedLanguage, repos, error } = this.state;
+    return !repos[selectedLanguage] && error === null;
   }
 
   render() {
@@ -120,7 +119,7 @@ export default class Popular extends React.Component {
 
         {error && <p>error</p>}
 
-        {repos && <pre>{JSON.stringify(repos, null, 2)}</pre>}
+        {repos[selectedLanguage] && <pre>{JSON.stringify(repos[selectedLanguage], null, 2)}</pre>}
       </React.Fragment>
     )
   }
