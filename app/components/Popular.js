@@ -59,6 +59,8 @@ LanguageNav.propTypes = {
   onUpdateLanguage: PropTypes.func.isRequired
 }
 
+// function ReposGrid (props) {
+  // const { repos } = props;
 function ReposGrid ({ repos }) {
   return (
     repos.map((repo, index) => {
