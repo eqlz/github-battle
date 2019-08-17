@@ -50,12 +50,13 @@ class PlayerInput extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onHandleSubmit}>
-        <label htmlFor='username'>
+      <form className='column player' onSubmit={this.onHandleSubmit}>
+        <label className='player-label' htmlFor='username'>
           {this.props.label}
         </label>
-        <div>
-          <input 
+        <div className='row player-inputs'>
+          <input
+            className='input-light'
             type='text'
             id='username'
             placeholder='github username'
@@ -64,6 +65,7 @@ class PlayerInput extends React.Component {
             onChange={this.onHandleChange}
           />
           <button
+            className='btn dark-btn'
             type='submit'
             disabled={!this.state.userName}
           >
@@ -86,7 +88,7 @@ export default class Battle extends React.Component {
       <React.Fragment>
         <Instructions />
 
-        <PlayerInput label='LABLE!' onSubmit={() => console.log('value!')} />
+        {/* <PlayerInput label='LABLE!' onSubmit={(value) => console.log('value!', value)} /> */}
       </React.Fragment>
     )
   }
