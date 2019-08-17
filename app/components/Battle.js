@@ -39,7 +39,7 @@ class PlayerInput extends React.Component {
   onHandleSubmit(event) {
     event.preventDefault();
 
-    this.props.onSubmit(this.state.userName);
+    this.props.onSubmitPlayer(this.state.userName);
   }
 
   onHandleChange(event) {
@@ -78,17 +78,52 @@ class PlayerInput extends React.Component {
 }
 
 PlayerInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubmitPlayer: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired
 }
 
 export default class Battle extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      playerOne: null,
+      playerTwo: null,
+    }
+
+    this.handleSubmittedPlayer = this.handleSubmittedPlayer.bind(this);
+  }
+
+  handleSubmittedPlayer(id, player) {
+    this.setState({
+      [id]: player
+    })
+  }
+
   render() {
+    const { playerOne, playerTwo } = this.state;
+
     return (
       <React.Fragment>
         <Instructions />
 
-        {/* <PlayerInput label='LABLE!' onSubmit={(value) => console.log('value!', value)} /> */}
+        <div>
+          <h1 className='center-text header-lg'>Players</h1>
+          <div className='row space-around'>
+            {playerOne === null && (
+              <PlayerInput
+                label='Player One'
+                onSubmitPlayer={(player) => this.handleSubmittedPlayer('playerOne', player)}
+              />
+            )}
+            {playerTwo === null && (
+              <PlayerInput
+                label='Player Two'
+                onSubmitPlayer={(player) => this.handleSubmittedPlayer('playerTwo', player)}
+              />
+            )}
+          </div>
+        </div>
       </React.Fragment>
     )
   }
