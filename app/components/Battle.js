@@ -4,21 +4,20 @@ import PropTypes from 'prop-types'
 
 function Instructions() {
   return (
-    <div>
-      <h1>Instructions</h1>
-      {/* why use an ordered list here? */}
-      <ol>
+    <div className='instructions-container'>
+      <h1 className='header-lg center-text'>Instructions</h1>
+      <ol className='container-sm grid center-text battle-instructions'>
         <li>
-          <h4>Enter two Github users</h4>
-          <FaUserFriends />
+          <h4 className='header-sm'>Enter two Github users</h4>
+          <FaUserFriends className='bg-light' color='rgb(255, 191, 116)' size={150} />
         </li>
         <li>
-          <h4>Battle</h4>
-          <FaFighterJet />
+          <h4 className='header-sm'>Battle</h4>
+          <FaFighterJet className='bg-light' color='#727272' size={150} />
         </li>
         <li>
-          <h4>See the winner</h4>
-          <FaTrophy />
+          <h4 className='header-sm'>See the winner</h4>
+          <FaTrophy className='bg-light' color='rgb(255, 215, 0)' size={150} />
         </li>
       </ol>
     </div>
