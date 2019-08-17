@@ -24,7 +24,7 @@ function Instructions() {
   )
 }
 
-class PlayInput extends React.Component {
+class PlayerInput extends React.Component {
   constructor(props) {
     super(props)
 
