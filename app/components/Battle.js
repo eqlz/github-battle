@@ -24,6 +24,40 @@ function Instructions() {
   )
 }
 
+class PlayInput extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      useName: ''
+    }
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+
+    this.props.onSubmit(this.state.userName);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.onSubmit}>
+        <input 
+          type='text'
+          value={this.state.userName}
+        />
+        <button
+          type='submit'
+        >
+          submit
+        </button>
+      </form>
+    )
+  }
+}
+
 export default class Battle extends React.Component {
   render() {
     return (
