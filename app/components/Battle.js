@@ -29,33 +29,55 @@ class PlayerInput extends React.Component {
     super(props)
 
     this.state = {
-      useName: ''
+      userName: ''
     }
 
-    this.onSubmit = this.onSubmit.bind(this);
+    this.onHandleSubmit = this.onHandleSubmit.bind(this);
+    this.onHandleChange = this.onHandleChange.bind(this);
   }
 
-  onSubmit(event) {
+  onHandleSubmit(event) {
     event.preventDefault();
 
     this.props.onSubmit(this.state.userName);
   }
 
+  onHandleChange(event) {
+    this.setState({
+      userName: event.target.value
+    })
+  }
+
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <input 
-          type='text'
-          value={this.state.userName}
-        />
-        <button
-          type='submit'
-        >
-          submit
-        </button>
+      <form onSubmit={this.onHandleSubmit}>
+        <label htmlFor='username'>
+          {this.props.label}
+        </label>
+        <div>
+          <input 
+            type='text'
+            id='username'
+            placeholder='github username'
+            autoComplete='off'
+            value={this.state.userName}
+            onChange={this.onHandleChange}
+          />
+          <button
+            type='submit'
+            disabled={!this.state.userName}
+          >
+            Submit
+          </button>
+        </div>
       </form>
     )
   }
+}
+
+PlayerInput.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired
 }
 
 export default class Battle extends React.Component {
@@ -63,6 +85,8 @@ export default class Battle extends React.Component {
     return (
       <React.Fragment>
         <Instructions />
+
+        <PlayerInput label='LABLE!' onSubmit={() => console.log('value!')} />
       </React.Fragment>
     )
   }
