@@ -152,6 +152,10 @@ li {
   flex-direction: row;
 }
 
+.players-container {
+  margin: 100px 0;
+}
+
 .player {
   flex: 1;
   margin: 0 20px;
@@ -226,4 +230,8 @@ li {
 
 .player-info .link {
   margin-left: 10px;
+}
+
+.btn-space {
+  margin: 40px auto;
 }
