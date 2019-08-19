@@ -27,12 +27,12 @@ function getProfile(userName) {
 }
 
 function getRepos(userName) {
-  return fetch(`https://api.github.com/users/${username}/repos&per_page=100`)
+  return fetch(`https://api.github.com/users/${userName}/repos?&per_page=100`)
     .then((response) => {
-      response.json();
+      return response.json();
     })
     .then((repos) => {
-      if(repos.message) {
+      if(repos !== null && typeof repos === 'object' && repos.message) {
         throw new Error(
           repos.message === 'Not Found'
             ? `${userName} doesn't exist`
@@ -59,13 +59,13 @@ function sortPlayers(players) {
   })
 }
 
-export function battle(playerUserNames) {
+export function getBattleResults(playerUserNames) {
   return Promise.all([
     getUserData(playerUserNames[0]),
     getUserData(playerUserNames[1])
   ])
   .then((results) => {
-    sortPlayers(results)
+    return sortPlayers(results)
   })
 }
 
