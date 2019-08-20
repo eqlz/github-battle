@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Card from './Card'
 import { fetchPopularRepos } from '../utils/api'
 import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle } from 'react-icons/fa'
 
@@ -66,16 +67,17 @@ function ReposGrid ({ repos }) {
   return (
     <ul className='grid space-around'>
       {repos.map((repo, index) => {
-          const { name, owner, html_url, stargazers_count, forks_count, open_issues_count } = repo;
-          const { login, avatar_url } = owner;
+        const { name, owner, html_url, stargazers_count, forks_count, open_issues_count } = repo;
+        const { login, avatar_url } = owner;
 
-          return (
-            <li key={html_url} className='repo bg-light'>
-              <h4 className='header-lg center-text'>{ '#' + (index + 1) }</h4>
-              <img className='avatar' src={avatar_url} alt={`Avatar for ${login}`} />
-              <h2 className='center-text'>
-                <a className='link' href={html_url}>{login}</a>
-              </h2>
+        return (
+          <li key={html_url}>
+            <Card
+              header={`# ${index + 1}`}
+              avatarUrl={avatar_url}
+              profileUrl={html_url}
+              name={login}
+            >
               <ul className='card-list'>
                 <li>
                   <FaUser color='rgb(255, 191, 116)' size={22} />
@@ -94,9 +96,9 @@ function ReposGrid ({ repos }) {
                   {open_issues_count.toLocaleString()} open issues
                 </li>
               </ul>
-              {/* <pre>{JSON.stringify(repo, null, 2)}</pre> */}
-            </li>
-          )
+            </Card>
+          </li>
+        )
       })}
     </ul>
   )
