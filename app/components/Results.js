@@ -80,27 +80,35 @@ export default class Results extends React.Component {
     }
 
     return (
-      <div className='grid space-around container-sm'>
-        <Card
-          header={winner.score === loser.score ? 'Tie' : 'Winner'}
-          subheader={`Score: ${winner.score.toLocaleString()}`}
-          name={winner.profile.login}
-          avatarUrl={winner.profile.avatar_url}
-          profileUrl={winner.profile.html_url}
+      <React.Fragment>
+        <div className='grid space-around container-sm'>
+          <Card
+            header={winner.score === loser.score ? 'Tie' : 'Winner'}
+            subheader={`Score: ${winner.score.toLocaleString()}`}
+            name={winner.profile.login}
+            avatarUrl={winner.profile.avatar_url}
+            profileUrl={winner.profile.html_url}
+          >
+            <ProfileList profile={winner.profile}/>
+          </Card>
+          
+          <Card
+            header={winner.score === loser.score ? 'Tie' : 'Loser'}
+            subheader={`Score: ${loser.score.toLocaleString()}`}
+            name={loser.profile.login}
+            avatarUrl={loser.profile.avatar_url}
+            profileUrl={loser.profile.html_url}
+          >
+            <ProfileList profile={loser.profile} />
+          </Card>
+        </div>
+        <button
+          className='btn dark-btn btn-space'
+          onClick={this.props.onReset}
         >
-          <ProfileList profile={winner.profile}/>
-        </Card>
-        
-        <Card
-          header={winner.score === loser.score ? 'Tie' : 'Loser'}
-          subheader={`Score: ${loser.score.toLocaleString()}`}
-          name={loser.profile.login}
-          avatarUrl={loser.profile.avatar_url}
-          profileUrl={loser.profile.html_url}
-        >
-          <ProfileList profile={loser.profile} />
-        </Card>
-      </div>
+          Reset
+        </button>
+      </React.Fragment>
     )
   }
 }
