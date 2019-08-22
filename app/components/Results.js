@@ -4,6 +4,7 @@ import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser } from '
 
 import { getBattleResults } from '../utils/api'
 import Card from './Card'
+import Loading from './Loading'
 
 function ProfileList({ profile }) {
   return (
@@ -72,7 +73,7 @@ export default class Results extends React.Component {
     const { winner, loser, error, loading } = this.state
 
     if(loading === true) {
-      return <p>Loading...</p>
+      return <Loading text={'Battle In Progress'} speed={200}/>
     }
 
     if(error) {
