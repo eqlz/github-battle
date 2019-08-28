@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export default function Card({ header, subheader, name, avatarUrl,  profileUrl, children }) {
   return (
-    <div className='card bg-light'>
+    <div className="card bg-light">
       <h4 className='header-lg center-text'>
         {header}
       </h4>
