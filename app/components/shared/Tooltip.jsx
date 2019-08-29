@@ -25,6 +25,7 @@ const styles = {
 
 const propTypes = {
   text: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 class Tooltip extends React.Component {
