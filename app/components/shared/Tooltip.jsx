@@ -59,9 +59,12 @@ class Tooltip extends React.Component {
       <div
         className={styles.container}
         onMouseOver={this.handleMouseOver}
+        onFocus={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
+        onBlur={this.handleMouseOut}
       >
         {isHovering === true && (<div className={styles.tooltip}>{text}</div>)}
+        {children}
       </div>
     );
   }
