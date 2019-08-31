@@ -4,13 +4,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-// import Popular from './components/popular/Popular';
-import Battle from './components/battle/Battle';
+import Popular from './components/popular/Popular';
+// import Battle from './components/battle/Battle';
 
 const App = () => (
   <div className="container">
-    {/* <Popular /> */}
-    <Battle />
+    <Popular />
+    {/* <Battle /> */}
   </div>
 );
 

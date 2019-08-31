@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import withHover from './withHover';
+
 const styles = {
   container: {
     position: 'relative',
@@ -25,6 +27,7 @@ const styles = {
 
 const propTypes = {
   text: PropTypes.string.isRequired,
+  isHovering: PropTypes.bool.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any,
 };
@@ -33,50 +36,18 @@ const defaultProps = {
   children: null,
 };
 
-class Tooltip extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isHovering: false,
-    };
-
-    this.handleMouseOver = this.handleMouseOver.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-  }
-
-  handleMouseOver() {
-    this.setState({
-      isHovering: true,
-    });
-  }
-
-  handleMouseOut() {
-    this.setState({
-      isHovering: false,
-    });
-  }
-
-  render() {
-    const { isHovering } = this.state;
-    const { text, children } = this.props;
-
-    return (
-      <div
-        style={styles.container}
-        onMouseOver={this.handleMouseOver}
-        onFocus={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}
-        onBlur={this.handleMouseOut}
-      >
-        {isHovering === true && (<div style={styles.tooltip}>{text}</div>)}
-        {children}
-      </div>
-    );
-  }
+function Tooltip({ text, children, isHovering }) {
+  return (
+    <div
+      style={styles.container}
+    >
+      {isHovering === true && (<div style={styles.tooltip}>{text}</div>)}
+      {children}
+    </div>
+  );
 }
 
 Tooltip.propTypes = propTypes;
 Tooltip.defaultProps = defaultProps;
 
-export default Tooltip;
+export default withHover(Tooltip, 'isHovering');
