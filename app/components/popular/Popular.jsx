@@ -8,6 +8,7 @@ import {
 import { fetchPopularRepos } from '../../utils/api';
 import Card from '../shared/Card';
 import Loading from '../shared/Loading';
+import Tooltip from '../shared/Tooltip';
 
 const languageNavPropTypes = {
   selectedLanguage: PropTypes.string.isRequired,
@@ -18,30 +19,6 @@ function LanguageNav({ selectedLanguage, onUpdateLanguage }) {
   const languages = ['All', 'JavaScript', 'Ruby', 'Java', 'CSS', 'Python'];
 
   return (
-  /*
-      // use React.createElement()
-      React.createElement(
-        'ul',
-        { className: 'flex-center' },
-        languages.map((language, index) => (
-          React.createElement(
-            'li',
-            { key: index },
-            React.createElement(
-              'button',
-              {
-                className: 'btn-clear nav-link',
-                onClick: () => this.updateLanguage(language),
-                style: language === this.state.selectedLanguage ? { color: 'red' } : null
-              },
-              language
-            )
-          )
-        ))
-      )
-      /* */
-
-  // use JSX
     <ul className="flex-center">
       {
         languages.map((language) => (
@@ -87,8 +64,10 @@ function ReposGrid({ repos }) {
             >
               <ul className="card-list">
                 <li>
-                  <FaUser color="rgb(255, 191, 116)" size={22} />
-                  <a href={`https://github.com/${login}`}>{login}</a>
+                  <Tooltip text="Github user's name">
+                    <FaUser color="rgb(255, 191, 116)" size={22} />
+                    <a href={`https://github.com/${login}`}>{login}</a>
+                  </Tooltip>
                 </li>
                 <li>
                   <FaStar color="rgb(255, 215, 0)" size={22} />

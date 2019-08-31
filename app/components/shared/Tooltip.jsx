@@ -25,7 +25,12 @@ const styles = {
 
 const propTypes = {
   text: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  children: PropTypes.any,
+};
+
+const defaultProps = {
+  children: null,
 };
 
 class Tooltip extends React.Component {
@@ -58,13 +63,13 @@ class Tooltip extends React.Component {
 
     return (
       <div
-        className={styles.container}
+        style={styles.container}
         onMouseOver={this.handleMouseOver}
         onFocus={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
         onBlur={this.handleMouseOut}
       >
-        {isHovering === true && (<div className={styles.tooltip}>{text}</div>)}
+        {isHovering === true && (<div style={styles.tooltip}>{text}</div>)}
         {children}
       </div>
     );
@@ -72,5 +77,6 @@ class Tooltip extends React.Component {
 }
 
 Tooltip.propTypes = propTypes;
+Tooltip.defaultProps = defaultProps;
 
 export default Tooltip;
