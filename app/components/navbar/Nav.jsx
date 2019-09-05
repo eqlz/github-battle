@@ -1,9 +1,9 @@
 import React from 'react';
-import { ThemeConsumer } from '../../contexts/Theme';
+import ThemeContext from '../../contexts/theme';
 
 function Nav() {
   return (
-    <ThemeConsumer>
+    <ThemeContext.Consumer>
       {({ theme, toggleTheme }) => (
         <nav className="row space-between">
           <button
@@ -16,7 +16,7 @@ function Nav() {
           </button>
         </nav>
       )}
-    </ThemeConsumer>
+    </ThemeContext.Consumer>
   );
 }
 
