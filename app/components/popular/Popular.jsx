@@ -99,24 +99,19 @@ function ReposGrid({ repos }) {
 ReposGrid.propTypes = reposGridPropTypes;
 
 class Popular extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedLanguage: 'All',
-      repos: {},
-      error: null,
-    };
-
-    this.updateLanguage = this.updateLanguage.bind(this);
-  }
+  // eslint-disable-next-line react/state-in-constructor
+  state = {
+    selectedLanguage: 'All',
+    repos: {},
+    error: null,
+  };
 
   componentDidMount() {
     // eslint-disable-next-line react/destructuring-assignment
     this.updateLanguage(this.state.selectedLanguage);
   }
 
-  updateLanguage(selectedLanguage) {
+  updateLanguage = (selectedLanguage) => {
     this.setState({
       selectedLanguage,
       error: null,
