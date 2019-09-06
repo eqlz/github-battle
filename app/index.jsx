@@ -9,6 +9,7 @@ import './index.css';
 
 import Popular from './components/popular/Popular';
 import Battle from './components/battle/Battle';
+import Results from './components/battle/Results';
 import ThemeContext from './contexts/theme';
 import Nav from './components/navbar/Nav';
 
@@ -34,8 +35,8 @@ class App extends React.Component {
             <div className="container">
               <Nav />
               <Route exact path="/" component={Popular} />
-              <Route path="/battle" component={Battle} />
-              {/* <Battle /> */}
+              <Route exact path="/battle" component={Battle} />
+              <Route path="/battle/results" component={Results} />
             </div>
           </div>
         </ThemeContext.Provider>

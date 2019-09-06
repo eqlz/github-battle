@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {
   FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaUser,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 
 import { getBattleResults } from '../../utils/api';
 import Card from '../shared/Card';
@@ -56,9 +58,9 @@ function ProfileList({ profile }) {
 ProfileList.propTypes = profileListPropTypes;
 
 const resultsPropTypes = {
-  playerOneUserName: PropTypes.string.isRequired,
-  playerTwoUserName: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 class Results extends React.Component {
@@ -74,7 +76,9 @@ class Results extends React.Component {
   }
 
   componentDidMount() {
-    const { playerOneUserName, playerTwoUserName } = this.props;
+    const { location } = this.props;
+    const { playerOneUserName, playerTwoUserName } = queryString.parse(location.search);
+
     getBattleResults([playerOneUserName, playerTwoUserName])
       .then((battleResults) => {
         this.setState({
@@ -96,10 +100,6 @@ class Results extends React.Component {
     const {
       winner, loser, error, loading,
     } = this.state;
-
-    const {
-      onReset,
-    } = this.props;
 
     if (loading === true) {
       return <Loading text="Battle In Progress" speed={200} />;
@@ -132,13 +132,13 @@ class Results extends React.Component {
             <ProfileList profile={loser.profile} />
           </Card>
         </div>
-        <button
-          type="button"
+
+        <Link
           className="btn dark-btn btn-space"
-          onClick={onReset}
+          to="/battle"
         >
           Reset
-        </button>
+        </Link>
       </>
     );
   }

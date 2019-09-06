@@ -150,6 +150,7 @@ class Popular extends React.Component {
   }
 
   render() {
+    console.log('this.props.match: ', this.props.match);
     const { selectedLanguage, repos, error } = this.state;
     return (
       <>

@@ -212,6 +212,7 @@ li {
   align-items: center;
   cursor: pointer;
   text-decoration: none;
+  max-width: 200px;
 }
 
 .dark-btn {

@@ -4,8 +4,8 @@ import {
   FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle,
 } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-import Results from './Results';
 import ThemeContext from '../../contexts/theme';
 
 function Instructions() {
@@ -147,6 +147,13 @@ function PlayerPreview({ userName, onReset, label }) {
 
 PlayerPreview.propTypes = palyerPreviewPropTypes;
 
+const battlePropTypes = {
+  match: PropTypes.shape({
+    path: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
 class Battle extends React.Component {
   constructor(props) {
     super(props);
@@ -154,7 +161,6 @@ class Battle extends React.Component {
     this.state = {
       playerOneUserName: '',
       playerTwoUserName: '',
-      showBattleResult: false,
     };
 
     this.handleSubmittedPlayer = this.handleSubmittedPlayer.bind(this);
@@ -174,21 +180,9 @@ class Battle extends React.Component {
   }
 
   render() {
-    const { playerOneUserName, playerTwoUserName, showBattleResult } = this.state;
+    const { playerOneUserName, playerTwoUserName } = this.state;
+    const { match } = this.props;
 
-    if (showBattleResult === true) {
-      return (
-        <Results
-          playerOneUserName={playerOneUserName}
-          playerTwoUserName={playerTwoUserName}
-          onReset={() => this.setState({
-            playerOneUserName: '',
-            playerTwoUserName: '',
-            showBattleResult: false,
-          })}
-        />
-      );
-    }
     return (
       <>
         <Instructions />
@@ -229,13 +223,15 @@ class Battle extends React.Component {
             playerOneUserName
             && playerTwoUserName
             && (
-              <button
-                type="button"
+              <Link
                 className="btn dark-btn btn-space"
-                onClick={() => this.setState({ showBattleResult: true })}
+                to={{
+                  pathname: `${match.path}/results`,
+                  search: `?playerOneUserName=${playerOneUserName}&playerTwoUserName=${playerTwoUserName}`,
+                }}
               >
                 Battle
-              </button>
+              </Link>
             )
           }
         </div>
@@ -243,5 +239,7 @@ class Battle extends React.Component {
     );
   }
 }
+
+Battle.propTypes = battlePropTypes;
 
 export default Battle;
